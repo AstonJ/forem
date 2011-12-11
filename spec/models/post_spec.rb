@@ -24,4 +24,16 @@ describe Forem::Post do
       assert post.owner_or_admin?(admin)
     end
   end
+  
+  context "after a post is made" do
+    it "it subscribes the poster to the topic" do
+    end
+    
+    it "creates an email to send to subscribers" do
+      ActionMailer::Base.deliveries.should == 1
+    end
+     
+     it "should deliver the signup email" do
+     end   
+  end
 end
