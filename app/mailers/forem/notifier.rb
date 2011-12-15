@@ -3,10 +3,8 @@ module Forem
     default from: "from@example.com"
   
     def post_made_in_topic(topic, user)
-      @topic = topic
-      @user = user
-      mail(:to => @user.email,
-           :subject => "Someone replied to: #{@topic.name}")
+      mail(:to => user.email,
+           :subject => "Someone replied to: #{topic.name}")
     end
   end
 end
