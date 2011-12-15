@@ -1,12 +1,12 @@
 module Forem
   class Notifier < ActionMailer::Base
     default from: "from@example.com"
-  end
   
-  def post_made_in_topic(topic, user)
-    @topic = topic
-    @user = user
-    mail(:to => user.email,
-         :subject => "Someone replied to: #{topic.name}")
+    def post_made_in_topic(topic, user)
+      @topic = topic
+      @user = user
+      mail(:to => @user.email,
+           :subject => "Someone replied to: #{@topic.name}")
+    end
   end
 end

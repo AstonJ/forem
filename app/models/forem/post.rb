@@ -1,6 +1,7 @@
 module Forem
   class Post < ActiveRecord::Base
     belongs_to :topic
+    has_many :subscriptions, :through => :topic
     belongs_to :user, :class_name => Forem.user_class.to_s
     belongs_to :reply_to, :class_name => "Post"
 
@@ -16,8 +17,8 @@ module Forem
     after_create :send_subscription_emails
     
     def send_subscription_emails
-       (self.topic.subscriptions - [self.user]).each do |user|
-        Notifier.post_made_in_topic(self.topic, self.user).deliver
+      (self.subscriptions - [self.user]).each do |user|
+        Forem::Notifier.post_made_in_topic(self.topic, user).deliver
       end
     end
 
